@@ -9,6 +9,7 @@ public class CarInputControl : MonoBehaviour
     private CarControllerVex vexCar; // the car controller we want to use
     InputMaster input;
     Vector2 moveInput;
+    Vector3 rotationInput;
     float handbrake;
     bool isTurbo = false;
     string lastTriggered;
@@ -27,8 +28,8 @@ public class CarInputControl : MonoBehaviour
         input.Player.Handbrake.canceled += ctx => HandbrakeChange(ctx.ReadValue<float>());
 
         //* Turbo
-        input.Player.Turbo.performed += ctx => isTurbo = true;
-        input.Player.Turbo.canceled += ctx => isTurbo = false;
+        input.Player.Turbo.performed += ctx => TurboChange(true);
+        input.Player.Turbo.canceled += ctx => TurboChange(false);
 
         //* Acceleration
         input.Player.Accelerate.performed += ctx => SpeedChange(ctx.ReadValue<float>());
@@ -41,6 +42,10 @@ public class CarInputControl : MonoBehaviour
         //* Steering
         input.Player.Steering.performed += ctx => SteerChange(ctx.ReadValue<Vector2>());
         input.Player.Steering.canceled += ctx => SteerChange(ctx.ReadValue<Vector2>());
+
+        //* Rotation
+        input.Player.RotateCar.performed += ctx => RotateCar(ctx.ReadValue<Vector2>());
+        input.Player.RotateCar.canceled += ctx => RotateCar(ctx.ReadValue<Vector2>());
         #endregion
     }
 
@@ -76,10 +81,27 @@ public class CarInputControl : MonoBehaviour
     }
     #endregion
 
+    #region Rotation
+    void RotateCar(Vector2 dir)
+    {
+        rotationInput.x = 0;
+        rotationInput.x = dir.x;
+        rotationInput.z = dir.y;
+    }
+    #endregion
+
     #region Handbrake
     void HandbrakeChange(float value)
     {
         handbrake = value * vexCar.handbrakeMultiplier;
+    }
+    #endregion
+
+    #region Turbo
+    void TurboChange(bool goTurbo)
+    {
+        isTurbo = goTurbo;
+        ApplyMovements();
     }
     #endregion
 
@@ -90,6 +112,13 @@ public class CarInputControl : MonoBehaviour
             SpeedChange(moveInput.y);
         }
 
+        ApplyMovements();
+    }
+
+    void ApplyMovements()
+    {
         vexCar.Move(moveInput.x, moveInput.y, moveInput.y, handbrake, isTurbo);
+
+        vexCar.Rotate(rotationInput);
     }
 }

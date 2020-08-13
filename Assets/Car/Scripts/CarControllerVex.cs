@@ -71,6 +71,10 @@ public class CarControllerVex : MonoBehaviour
     private float defaultStiffness;
     #endregion
 
+    #region Rotation
+    public float rotationSpeed = 50;
+    #endregion
+
     #region Misc.
     [Header("Misc.")]
     public Vector3 m_CentreOfMassOffset;
@@ -188,7 +192,10 @@ public class CarControllerVex : MonoBehaviour
         BrakeInput = footbrake = -1 * Mathf.Clamp(footbrake, -1, 0);
         handbrake = Mathf.Clamp(handbrake, 0, 1);
 
-        accel = (isTurbo) ? accel + turboAmount : accel;
+        if (isTurbo)
+        {
+            accel += turboAmount;
+        }
 
         #region Steering
         // * //
@@ -230,7 +237,6 @@ public class CarControllerVex : MonoBehaviour
         if (m_SteerAngle == 0)
         {
             anglePct = 100 / m_MaximumSteerAngle;
-            print("");
         }
         anglePct = Mathf.Abs(anglePct); //Make our number positive if its negaitve
         anglePct = 100 - anglePct;
@@ -296,6 +302,10 @@ public class CarControllerVex : MonoBehaviour
         TractionControl();
     }
 
+    public void Rotate(Vector3 direction)
+    {
+        transform.Rotate(direction * rotationSpeed * Time.deltaTime);
+    }
 
     private void CapSpeed()
     {

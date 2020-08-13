@@ -196,15 +196,59 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "14262edc-f177-4a2c-bcf6-df22269e8dc2",
-                    "path": "<Gamepad>/rightStick",
+                    "name": "Right Stick",
+                    "id": "11164f07-817b-4934-8639-7f21c2c83f50",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate Car",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "ec75d459-77d6-46b8-b791-95c3df023316",
+                    "path": "<Gamepad>/rightStick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad (General)",
                     "action": "Rotate Car",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "69d36275-fea7-4de4-9ad3-b80fb2bb14eb",
+                    "path": "<Gamepad>/rightStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad (General)",
+                    "action": "Rotate Car",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "9b90d9ba-b767-4920-a08e-4e11b26af163",
+                    "path": "<Gamepad>/rightStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad (General)",
+                    "action": "Rotate Car",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "ea1296ec-a983-4348-9aae-5d58db2d93f7",
+                    "path": "<Gamepad>/rightStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad (General)",
+                    "action": "Rotate Car",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 },
                 {
                     "name": "Arrow Keys",
